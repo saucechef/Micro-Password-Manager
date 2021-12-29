@@ -88,7 +88,7 @@ void MainWindow::textChanged() {
         ui->buttonCopyUsername->setText("Copy \"" + username + "\"");
         ui->buttonCopyUsername->setEnabled(true);
     } else {
-        ui->buttonCopyUsername->setText("Copy username");
+        ui->buttonCopyUsername->setText("Copy Username");
         ui->buttonCopyUsername->setEnabled(false);
     }
 }
