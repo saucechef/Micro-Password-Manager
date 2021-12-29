@@ -11,8 +11,9 @@ Einrichtung:
 1. Legen Sie ein Hauptpasswort fest. Dies ist das einzige Passwort, das Sie sich merken müssen (schreiben Sie es auf, aber speichern Sie es nicht auf dem Rechner, auf dem Sie den Manager verwenden). Es ist wichtig zu betonen, dass Sie DIESES PASSWORT NICHT VERLIEREN DÜRFEN, denn es gibt keine Möglichkeit, es wiederherzustellen. Das Passwort muss mindestens 8 Zeichen lang sein und sollte, muss aber nicht, Sonderzeichen enthalten. Halten Sie sich einfach an die allgemeinen Richtlinien für sichere Passwörter.
 
 2. (Optional / Bequemlichkeit) Geben Sie Ihre Dienste und/oder Benutzernamen in die Datei "services.txt" ein. So können Sie sie aus dem Dropdown-Menü auswählen und müssen sie nicht jedes Mal manuell eintragen. In der Datei gibt es bereits einige Beispiele für das Format (verwenden Sie eine Zeile für jeden Dienst und trennen Sie Dienstname und Benutzername mit einem Schrägstrich). Sie können auch einen benutzerdefinierten Zeichensatz angeben, wenn ein Dienst bestimmte Zeichen des Standardzeichensatzes nicht zulässt, indem Sie ihn hinter einem zweiten Schrägstrich angeben. Beispiel: Steam[/Benutzername][/Zeichensatz]
+Die Datei kann über das Menü "Options" oder durch STRG+E geöffnet werden. Vergessen Sie das neu Laden der Datei nach dem Bearbeiten nicht.
 
-3. (Optional / Bequemlichkeit) Speichern Sie das Master-Passwort. Entgegen der Aussage in der Einleitung kann dieses Tool tatsächlich Passwörter speichern, allerdings nur für das Hauptpasswort. Geben Sie Ihr Master-Passwort ein, wählen Sie irgendeinen Dienst, markieren Sie das Kästchen "save password" und klicken Sie auf "generate password". Das Master-Passwort ist nun verschlüsselt in der Datei "password" gespeichert und wird bei jedem Start des Managers automatisch geladen. Wenn Sie das Passwort löschen möchten, löschen Sie einfach die Datei.
+3. (Optional / Bequemlichkeit) Speichern Sie das Master-Passwort. Entgegen der Aussage in der Einleitung kann dieses Tool tatsächlich Passwörter speichern, allerdings nur für das Hauptpasswort. Geben Sie Ihr Master-Passwort ein und drücken Sie STRG+S oder wählen Sie den Eintrag "Save Password" im Options-Menü. Das Master-Passwort ist nun verschlüsselt in der Datei "password" gespeichert und wird bei jedem Start des Managers automatisch geladen. Wenn Sie das Passwort löschen möchten, löschen Sie einfach die Datei. Das kann auch from Options-Menü aus getan werden.
 BITTE VERSTEHEN SIE DIE DAMIT VERBUNDENEN SICHERHEITSEINBUSSEN: Mögliche Angreifer werden NICHT in der Lage sein, Ihr Master-Passwort zu entschlüsseln, da es mit einem Fingerabdruck Ihrer Hardware verschlüsselt wurde (d.h. wenn jemand die "password"-Datei in die Hände bekommt, kann er Ihr Master-Passwort NICHT in Erfahrung bringen und er kann die Datei auch nicht mit seiner Kopie des Managers verwenden, da es nicht entschlüsselt werden kann), !!ABER!! jemand mit PHYSISCHEM ZUGANG zu Ihrem Rechner wird in der Lage sein, den Manager zu öffnen, dienstspezifische Passwörter zu erzeugen und zu kopieren! Das macht diese Funktion nur auf privaten Rechnern sicher!
 
 4. Ändern Sie die Passwörter aller Konten, für die Sie dieses Tool verwenden wollen. Dies kann mühsam sein, ist aber ein notwendiger Schritt. Da dieses Tool zufällige und sichere Passwörter für jeden Dienst generiert, müssen Sie Ihre Konten so einrichten, dass sie diese neuen Passwörter verwenden.
@@ -26,18 +27,18 @@ Verwendung (Anmeldung bei Konten):
 
 3. (Falls Sie das Master-Passwort nicht gespeichert haben:) Geben Sie das Master-Passwort ein.
 
-4. Klicken Sie auf "Passwort generieren". Es dauert einen kurzen Moment und das Passwort wird direkt in Ihre Zwischenablage kopiert.
+4. Klicken Sie auf "Generate Password". Es dauert einen kurzen Moment und das Passwort wird direkt in Ihre Zwischenablage kopiert.
 
 5. Fügen Sie das generierte Passwort in die Anmeldemaske ein.
 
-6. Wenn Sie einen Benutzernamen für den ausgewählten Dienst gespeichert haben, können Sie auf "copy <username>" klicken und diesen ebenfalls in die Anmeldemaske einfügen.
+6. Wenn Sie einen Benutzernamen für den ausgewählten Dienst gespeichert haben, können Sie auf "Copy <username>" klicken und diesen ebenfalls in die Anmeldemaske einfügen.
 
 
 Tipps und Tricks:
 
 Wenn Sie Ihr Master-Passwort gespeichert haben, genügt es, einen Dienst aus dem Dropdown-Menü auszuwählen, um das Passwort zu generieren. Sie brauchen dann nichts weiter zu betätigen.
 
-Sie können anstelle der Schaltfläche "Passwort generieren" auch die Eingabetaste drücken, wenn sich Ihr Cursor noch im Feld für das Master-Passwort befindet, um die Passworterstellung auszulösen.
+Sie können anstelle der Schaltfläche "Generate Password" auch die Eingabetaste drücken, wenn sich Ihr Cursor noch im Feld für das Master-Passwort befindet, um die Passworterstellung auszulösen.
 
 
 HAFTUNGSAUSSCHLUSS:

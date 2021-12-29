@@ -11,8 +11,9 @@ How to set up:
 1. Determine a master password. This is the only password you will need to remember (write it down, but do not save it on the machine you are using the manager on). It is important to stress that YOU MAY NOT LOSE THIS PASSWORD, FOR THERE IS NO WAY TO RECOVER IT. The password needs to be at least 8 characters in length and should, but does not need to, contain special characters. Just stick to common guidelines for strong passwords.
 
 2. (Optional / Convenience) Enter your services and or usernames into "services.txt". This will allow you to select them from the dropdown menu rather than having to enter them manually everytime. There are some examples for the format in the file already (use a line for every service and split service name and username with a slash). You can also specify a custom charset, if a service does not allow certain characters from the default charset by entering it behind a second slash. Example: Steam[/username][/charset]
+You can open the services.txt file from the options menu or by pressing CTRL+E. Do not forget to reload the file after editing.
 
-3. (Optional / Convenience) Save the master password. Contrary to what was stated in the introduction, this tool can indeed save passwords, but it does so only for the master password. Enter your master password, select a random service, check the "save password" box and hit "generate password". The master password is now encrypted and saved to the "password" file and will be automatically loaded every time you start up the manager. If you wish to delete the password, just delete the file.
+3. (Optional / Convenience) Save the master password. Contrary to what was stated in the introduction, this tool can indeed save passwords, but it does so only for the master password. Enter your master password and hit CTRL+S or select "Save Password" from the options menu. The master password is now encrypted and saved to the "password" file and will be automatically loaded every time you start up the manager. If you wish to delete the password, just delete the file. This can also be done from the options menu.
 PLEASE UNDERSTAND THE SECURITY COMPROMISE THIS IMPLIES: Possible attackers will NOT be able to decrypt your master password since it was encrypted with a fingerprint of your hardware (that means if someone gets their hands on the "password" file itself, they CAN NOT get to know your master password and they can also not use the file with their copy of the manager, it will fail to decrypt), !!BUT!! someone with PHYSICAL ACCESS to your machine will be able to open the manager, generate and copy service-specific passwords! This makes this feature only safe to use on private machines!
 
 4. Change password of every account you want to use this tool on. This can be tedious, but it is a necessary step. Since this tool generates random and strong passwords for every service, you will need to set your accounts to use those new passwords.
@@ -26,18 +27,18 @@ How to use (to login into an account):
 
 3. (If you have not saved the master password:) Enter the master password.
 
-4. Hit "generate password". This will take a short moment and the copy the password to your clipboard directly.
+4. Hit "Generate Password". This will take a short moment and the copy the password to your clipboard directly.
 
 5. Paste the generated password into the login mask.
 
-6. If you saved a username for the selected service, you can hit "copy <username>" and paste it into the login mask as well.
+6. If you saved a username for the selected service, you can hit "Copy <username>" and paste it into the login mask as well.
 
 
 Tips and tricks:
 
 If you have saved your master password, merely selecting a service from the dropdown menu will trigger the password generation. You will not need to press anything else.
 
-You can hit enter instead of the "generate password" button, if your cursor is still in the master password box to trigger password generation.
+You can hit enter instead of the "Generate Password" button, if your cursor is still in the master password box to trigger password generation.
 
 
 DISCLAIMER:
