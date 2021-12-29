@@ -110,21 +110,6 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="boxSavePassword">
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="layoutDirection">
-       <enum>Qt::RightToLeft</enum>
-      </property>
-      <property name="text">
-       <string>Save password (encrypted)?</string>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QPushButton" name="buttonGenerate">
       <property name="font">
        <font>
@@ -178,8 +163,47 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionSavePassword"/>
+    <addaction name="actionDeletePassword"/>
+    <addaction name="actionEditServices"/>
+    <addaction name="actionReloadServices"/>
+   </widget>
+   <addaction name="menuOptions"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSavePassword">
+   <property name="text">
+    <string>Save master password</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionEditServices">
+   <property name="text">
+    <string>Edit services.txt</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionReloadServices">
+   <property name="text">
+    <string>Reload services</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionDeletePassword">
+   <property name="text">
+    <string>Delete master password</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
