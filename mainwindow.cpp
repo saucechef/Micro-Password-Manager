@@ -104,6 +104,8 @@ void MainWindow::loadServices() {
         QString servicesString = QString::fromUtf8(servicesFile->readAll());
         QStringList servicesRows = servicesString.split('\n', QString::SplitBehavior::SkipEmptyParts);
 
+        usernameMap.clear(); // Clear maps
+        charsetMap.clear();
         foreach (QString row, servicesRows) { // Split services and usernames into map
             QStringList buffer = row.split('/', QString::SplitBehavior::SkipEmptyParts);
             if (buffer.length() == 1) {
