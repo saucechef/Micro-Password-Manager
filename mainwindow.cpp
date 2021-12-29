@@ -117,12 +117,17 @@ void MainWindow::loadServices() {
         }
 
         QStringList services = QStringList(usernameMap.keys());
-        for(int k = 0; k < (services.size()/2); k++) services.swap(k, services.size()-(1+k)); // Reverse list
+        for (int i = 0; i < (services.size()/2); i++) services.swap(i, services.size()-(1+i)); // Reverse list
 
+        ui->comboService->blockSignals(true);
+        ui->comboService->clear();
         ui->comboService->insertItems(0, services);
         ui->comboService->setCurrentText("");
         ui->comboService->setCurrentIndex(-1);
+        ui->comboService->blockSignals(false);
         servicesFile->close();
+
+        status("Reloaded services", "#ddffdd");
     }
 }
 
