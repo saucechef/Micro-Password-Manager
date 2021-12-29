@@ -8,6 +8,8 @@
 #include <QFuture>
 #include <QtConcurrent/QtConcurrent>
 #include <QFutureWatcher>
+#include <QDesktopServices>
+#include <QUrl>
 #include "crypt_backend.h"
 
 QT_BEGIN_NAMESPACE
@@ -64,6 +66,31 @@ private slots:
      * \brief Copies service-specific username to clipboard.
      */
     void usernameToClipboard();
+
+    /*!
+     * \brief Loads list of services from file and initialises Maps.
+     */
+    void loadServices();
+
+    /*!
+     * \brief Loads and decrypts master password from file if available.
+     */
+    void loadPassword();
+
+    /*!
+     * \brief Encrypts and saves master password to file.
+     */
+    void savePassword();
+
+    /*!
+     * \brief Deletes saved password.
+     */
+    void deletePassword();
+
+    /*!
+     * \brief Opens services.txt in default text editor.
+     */
+    void editServices();
 
     /*!
      * \brief Updates UI whenever text is changed.
