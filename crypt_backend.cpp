@@ -14,16 +14,17 @@ QString crypt_backend::generator(QString master, QString service, QString charse
     QString password = "";
     for (int i = 0; i < buffer->length(); i += 2) {
         int index;
+        int section = (buffer->at(i) << 8) + buffer->at(i+1); // Combine two bytes of buffer to short value
         if (charset == defaultCharset) {
             switch (i) { // This switch guarantees that every kind of character is in the password for very rare cases
-                case 0: index = 62 + mod((buffer->at(i) << 8) + buffer->at(i+1), 30); break; // Get special character
-                case 2: index = 36 + mod((buffer->at(i) << 8) + buffer->at(i+1), 26); break; // Get upper case character
-                case 4: index = 10 + mod((buffer->at(i) << 8) + buffer->at(i+1), 26); break; // Get lower case character
-                case 6: index = mod((buffer->at(i) << 8) + buffer->at(i+1), 10); break; // Get number
-                default: index = mod((buffer->at(i) << 8) + buffer->at(i+1), charset.length()); // Get random character
+                case 0: index = 62 + mod(section, 30); break; // Get special character
+                case 2: index = 36 + mod(section, 26); break; // Get upper case character
+                case 4: index = 10 + mod(section, 26); break; // Get lower case character
+                case 6: index = mod(section, 10); break; // Get number
+                default: index = mod(section, charset.length()); // Get random character
             }
         } else {
-            index = mod((buffer->at(i) << 8) + buffer->at(i+1), charset.length()); // Get random character
+            index = mod(section, charset.length()); // Get random character
         }
         password.append(charset.at(index));
     }
@@ -58,11 +59,11 @@ QByteArray* crypt_backend::getLocalKey() {
     // Obtain mac adress
     QString macAdress;
     foreach (QNetworkInterface interface, QNetworkInterface::allInterfaces()) {
-        if (!(interface.flags() & QNetworkInterface::IsLoopBack))
+        if (!(interface.flags() & QNetworkInterface::IsLoopBack)) // Ignore loopback devices
             macAdress = interface.hardwareAddress();
     }
 
-    // Reshape string to byte array
+    // Reshape mac string to byte array
     QStringList macParts = macAdress.split(':', QString::SplitBehavior::SkipEmptyParts);
     QByteArray* macBytes = new QByteArray();
     foreach (QString part, macParts) {

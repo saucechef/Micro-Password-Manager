@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    // Connect buttons
+    // Connect signals and slots
     connect(ui->buttonGenerate, SIGNAL(clicked()), this, SLOT(generate()));
     connect(ui->linePassword, SIGNAL(textChanged(QString)), this, SLOT(textChanged()));
     connect(ui->linePassword, SIGNAL(returnPressed()), this, SLOT(generate()));
@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Set password line to hide input
     ui->linePassword->setEchoMode(QLineEdit::Password);
+
+    // Update UI
     textChanged(); 
 }
 
@@ -39,21 +41,21 @@ void MainWindow::generate() {
 
     // Check inputs
     if (ui->comboService->currentText().length() == 0 && ui->linePassword->text().length() == 0) {
-        status("Enter details first", "#ffdddd");
+        status("Enter details first", red);
         return;
     } else if (ui->linePassword->text().length() == 0) {
-        status("Enter password", "#ffffdd");
+        status("Enter password", yellow);
         return;
     } else if (ui->comboService->currentText().length() < minServiceLength) {
-        status("Service name too short", "#ffdddd");
+        status("Service name too short", red);
         return;
     } else if (ui->linePassword->text().length() < minPwLength) {
-        status("Password too short", "#ffdddd");
+        status("Password too short", red);
         return;
     }
 
     // Compute password
-    status("Generating password...", "#ddffff");
+    status("Generating password...", cyan);
     QString charset = charsetMap.value(ui->comboService->currentText(), crypt_backend::defaultCharset);
     future = QtConcurrent::run(crypt_backend::generator, ui->linePassword->text(), ui->comboService->currentText().toLower(), charset);
     watcher.setFuture(future);
@@ -62,24 +64,24 @@ void MainWindow::generate() {
 
 void MainWindow::passwordToClipboard() {
     clipboard->setText(future.result());
-    status("Copied password to clipboard", "#ddffdd");
+    status("Copied password to clipboard", green);
 }
 
 void MainWindow::usernameToClipboard() {
     clipboard->setText(usernameMap.value(ui->comboService->currentText()));
-    status("Copied username to clipboard", "#ddffdd");
+    status("Copied username to clipboard", green);
 }
 
 void MainWindow::textChanged() {
     // Check inputs
     if (ui->linePassword->text().length() < minPwLength && ui->comboService->currentText().length() < minServiceLength) {
-        status("Enter details", "#ffffdd");
+        status("Enter details", yellow);
     } else if (ui->linePassword->text().length() < minPwLength) {
-        status("Enter password", "#ffffdd");
+        status("Enter password", yellow);
     } else if (ui->comboService->currentText().length() < minServiceLength) {
-        status("Enter service", "#ffffdd");
+        status("Enter service", yellow);
     } else {
-        status("Ready to generate", "#ddffdd");
+        status("Ready to generate", green);
     }
 
     // Check if username is available
@@ -106,13 +108,13 @@ void MainWindow::loadServices() {
 
         usernameMap.clear(); // Clear maps
         charsetMap.clear();
-        foreach (QString row, servicesRows) { // Split services and usernames into map
+        foreach (QString row, servicesRows) { // Split services and usernames into maps
             QStringList buffer = row.split('/', QString::SplitBehavior::SkipEmptyParts);
-            if (buffer.length() == 1) {
+            if (buffer.length() == 1) {             // If there is only a service
                 usernameMap.insert(buffer.at(0), "n/a");
-            } else if (buffer.length() == 2) {
+            } else if (buffer.length() == 2) {      // If there are service and username
                 usernameMap.insert(buffer.at(0), buffer.at(1));
-            } else if (buffer.length() == 3) {
+            } else if (buffer.length() == 3) {      // If there are service, username and charset
                 usernameMap.insert(buffer.at(0), buffer.at(1));
                 charsetMap.insert(buffer.at(0), buffer.at(2));
             }
@@ -129,7 +131,9 @@ void MainWindow::loadServices() {
         ui->comboService->blockSignals(false);
         servicesFile->close();
 
-        status("Reloaded services", "#ddffdd");
+        status("Reloaded services", green);
+    } else {
+        status("Could not access file", red);
     }
 }
 
@@ -142,9 +146,9 @@ void MainWindow::loadPassword() {
         if (passwordPlain.contains("PW:")) { // Check if password is valid
             passwordPlain.remove(0, 3);
             ui->linePassword->setText(passwordPlain);
-            status("Password loaded", "#ddffdd");
+            status("Password loaded", green);
         } else {
-            status("Password decryption failed", "#ffdddd");
+            status("Password decryption failed", red);
         }
         passwordFile->close();
         delete key;
@@ -154,7 +158,7 @@ void MainWindow::loadPassword() {
 
 void MainWindow::savePassword() {
     if (ui->linePassword->text().length() < minPwLength) {
-        status("Password too short", "#ffdddd");
+        status("Password too short", red);
         return;
     }
     if (passwordFile->open(QIODevice::WriteOnly)) {
@@ -169,12 +173,12 @@ void MainWindow::savePassword() {
         passwordFile->close();
 
         // Update UI
-        status("Password saved", "#ddffdd");
+        status("Password saved", green);
 
         delete key;
         delete encrypted;
     } else {
-        status("Could not access file", "#ffdddd");
+        status("Could not access file", red);
     }
 }
 
@@ -182,9 +186,9 @@ void MainWindow::deletePassword() {
     passwordFile = new QFile("password");
     if (passwordFile->open(QIODevice::WriteOnly)) {
         passwordFile->remove();
-        status("Password deleted", "#ddffdd");
+        status("Password deleted", green);
     } else {
-        status("Could not access file", "#ffdddd");
+        status("Could not access file", red);
     }
 }
 

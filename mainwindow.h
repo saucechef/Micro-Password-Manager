@@ -34,6 +34,15 @@ private:
     QFutureWatcher<QString> watcher;
 
     /*!
+     * \brief Color codes.
+     */
+    inline static const QString white = "#ffffff";
+    inline static const QString red = "#ffdddd";
+    inline static const QString green = "#ddffdd";
+    inline static const QString yellow = "#ffffdd";
+    inline static const QString cyan = "#ddffff";
+
+    /*!
      * \brief Minimum length of master password.
      */
     inline static const int minPwLength = 8;
@@ -51,7 +60,6 @@ private:
     void status(QString status, QString color = "#ffffff");
 
 private slots:
-
     /*!
      * \brief Starts generating password in separate thread and saves master password if selected.
      */
